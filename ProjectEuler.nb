@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     95463,       2310]
-NotebookOptionsPosition[     88610,       2071]
-NotebookOutlinePosition[     88952,       2086]
-CellTagsIndexPosition[     88909,       2083]
+NotebookDataLength[     99353,       2435]
+NotebookOptionsPosition[     91953,       2178]
+NotebookOutlinePosition[     92295,       2193]
+CellTagsIndexPosition[     92252,       2190]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -2037,19 +2037,38 @@ Cell[CellGroupData[{
 Cell["Implementation", "Subsubsection",
  CellChangeTimes->{{3.590641762676753*^9, 3.590641765405909*^9}}],
 
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"findSolution", "[", "n_", "]"}], ":=", 
+  RowBox[{"Max", "[", 
+   RowBox[{"FactorInteger", "[", "n", "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.590641797325735*^9, 3.5906418002589025`*^9}, {
+  3.590641859258277*^9, 3.5906419063059683`*^9}, {3.5906705273429976`*^9, 
+  3.590670550411317*^9}}],
+
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Max", "[", 
-  RowBox[{"FactorInteger", "[", "600851475143", "]"}], "]"}]], "Input",
- CellChangeTimes->{{3.590641797325735*^9, 3.5906418002589025`*^9}, {
-  3.590641859258277*^9, 3.5906419063059683`*^9}}],
+ RowBox[{"findSolution", "[", "600851475143", "]"}]], "Input"],
 
 Cell[BoxData["6857"], "Output",
- CellChangeTimes->{{3.5906418628404818`*^9, 3.590641908685104*^9}}]
-}, Open  ]]
-}, Open  ]]
+ CellChangeTimes->{3.590670561622958*^9}]
 }, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"AbsoluteTiming", "[", 
+  RowBox[{"findSolution", "[", "600851475143", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5906705709984946`*^9, 3.5906705746137013`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.`", ",", "6857"}], "}"}]], "Output",
+ CellChangeTimes->{{3.590670575219736*^9, 3.590670578770939*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -2061,12 +2080,100 @@ Cell[CellGroupData[{
 Cell["Algorithm", "Subsubsection",
  CellChangeTimes->{{3.5906419275461826`*^9, 3.5906419292322793`*^9}}],
 
-Cell["", "Program",
+Cell["\<\
+2\t56
+2\t28
+2\t14
+\t7
+
+for (i = 2; i < n / 2; )
+\tif i is a factor of n
+\t\tn = n / i
+\telse if i == 2
+\t\ti++
+\telse
+\t\ti += 2
+\t\t
+return n\
+\>", "Program",
  CellChangeTimes->{{3.5906419858085155`*^9, 3.5906419910858173`*^9}, {
-  3.590642055718514*^9, 3.5906420609628143`*^9}}]
+  3.590642055718514*^9, 3.5906420609628143`*^9}, {3.5906693467234697`*^9, 
+  3.5906694338524537`*^9}, {3.590669581766914*^9, 3.590669621494186*^9}, {
+  3.5906696515419044`*^9, 3.5906696998816695`*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Implementation", "Subsubsection",
+ CellChangeTimes->{{3.590669733365585*^9, 3.590669735818725*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"findSolution", "[", "input_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", " ", 
+     RowBox[{"n", ",", "i", ",", " ", "half"}], "}"}], ",", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"n", " ", "=", " ", "input"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"i", " ", "=", " ", "2"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"half", " ", "=", " ", 
+       RowBox[{"n", "/", "2"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"While", "[", 
+       RowBox[{
+        RowBox[{"i", "<", "half"}], ",", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"Divisible", "[", 
+           RowBox[{"n", ",", "i"}], "]"}], ",", 
+          RowBox[{
+           RowBox[{"n", "=", 
+            RowBox[{"n", "/", "i"}]}], ";", 
+           RowBox[{"half", "=", 
+            RowBox[{"n", "/", "2"}]}]}], ",", 
+          RowBox[{"i", "+=", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"i", "\[Equal]", "2"}], ",", "1", ",", "2"}], "]"}]}]}], 
+         "]"}]}], "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"Return", "[", "n", "]"}], ";"}], "\[IndentingNewLine]", 
+     ")"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.590669742651116*^9, 3.5906697909938807`*^9}, 
+   3.590669850155265*^9, {3.5906699316399255`*^9, 3.590670014885687*^9}, {
+   3.59067007473411*^9, 3.5906701411489086`*^9}, {3.590670229940987*^9, 
+   3.5906702374264154`*^9}, {3.590670309329528*^9, 3.590670346970681*^9}, {
+   3.5906703857679*^9, 3.5906703930953193`*^9}, {3.590670432219557*^9, 
+   3.5906704366728115`*^9}, {3.5906705981390467`*^9, 3.590670631508956*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"findSolution", "[", "600851475143", "]"}]], "Input",
+ CellChangeTimes->{{3.5906705146492715`*^9, 3.590670518096469*^9}}],
+
+Cell[BoxData["6857"], "Output",
+ CellChangeTimes->{3.59067051880851*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"AbsoluteTiming", "[", 
+  RowBox[{"findSolution", "[", "600851475143", "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.`", ",", "6857"}], "}"}]], "Output",
+ CellChangeTimes->{{3.5906705850282974`*^9, 3.590670587770454*^9}}]
 }, Open  ]]
-}, Open  ]]
-}, Open  ]]
+}, Closed]]
+}, Closed]]
+}, Open  ]],
+
+Cell["Problem 4", "Section",
+ CellChangeTimes->{{3.5906706625617313`*^9, 3.5906706639418106`*^9}}]
 }, Open  ]]
 },
 WindowSize->{903, 607},
@@ -2297,20 +2404,38 @@ Cell[CellGroupData[{
 Cell[87540, 2031, 102, 1, 36, "Subsection"],
 Cell[CellGroupData[{
 Cell[87667, 2036, 105, 1, 27, "Subsubsection"],
+Cell[87775, 2039, 331, 7, 31, "Input"],
 Cell[CellGroupData[{
-Cell[87797, 2041, 226, 4, 31, "Input"],
-Cell[88026, 2047, 99, 1, 30, "Output"]
-}, Open  ]]
-}, Open  ]]
+Cell[88131, 2050, 76, 1, 31, "Input"],
+Cell[88210, 2053, 73, 1, 30, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[88186, 2055, 100, 1, 36, "Subsection"],
+Cell[88320, 2059, 187, 3, 31, "Input"],
+Cell[88510, 2064, 144, 3, 30, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
 Cell[CellGroupData[{
-Cell[88311, 2060, 104, 1, 27, "Subsubsection"],
-Cell[88418, 2063, 140, 2, 40, "Program"]
+Cell[88715, 2074, 100, 1, 28, "Subsection"],
+Cell[CellGroupData[{
+Cell[88840, 2079, 104, 1, 27, "Subsubsection"],
+Cell[88947, 2082, 442, 19, 248, "Program"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[89426, 2106, 105, 1, 21, "Subsubsection"],
+Cell[89534, 2109, 1707, 38, 192, "Input"],
+Cell[CellGroupData[{
+Cell[91266, 2151, 144, 2, 31, "Input"],
+Cell[91413, 2155, 72, 1, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[91522, 2161, 117, 2, 31, "Input"],
+Cell[91642, 2165, 146, 3, 30, "Output"]
 }, Open  ]]
-}, Open  ]]
-}, Open  ]]
+}, Closed]]
+}, Closed]]
+}, Open  ]],
+Cell[91839, 2174, 98, 1, 71, "Section"]
 }, Open  ]]
 }
 ]
